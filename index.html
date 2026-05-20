@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ganesh | Supply Chain Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #3b82f6;
+      --accent2: #06b6d4;
+      --light: #f8fafc;
+      --muted: #64748b;
+      --card: #ffffff;
+      --border: #e2e8f0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--primary); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; background: rgba(15,23,42,0.95);
+      backdrop-filter: blur(10px); z-index: 100; padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo { color: #fff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: #cbd5e1; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0e7490 100%);
+      display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;
+    }
+    .hero-content { max-width: 750px; }
+    .hero-badge {
+      display: inline-block; background: rgba(59,130,246,0.2); border: 1px solid var(--accent);
+      color: var(--accent); padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.8rem;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero-content h1 { font-size: clamp(2.5rem, 6vw, 4rem); color: #fff; font-weight: 700; line-height: 1.1; }
+    .hero-content h1 span { color: var(--accent2); }
+    .hero-content p { color: #94a3b8; font-size: 1.1rem; margin: 1.5rem 0 2rem; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 0.75rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid #475569; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center;
+    }
+    .section-title span { color: var(--accent); }
+    .section-sub { text-align: center; color: var(--muted); margin-bottom: 3rem; font-size: 1rem; }
+    .divider { width: 60px; height: 4px; background: var(--accent); margin: 0.75rem auto 1rem; border-radius: 2px; }
+
+    /* ABOUT */
+    #about { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .about-text p { color: #475569; line-height: 1.8; margin-bottom: 1rem; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      background: var(--light); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem; text-align: center;
+    }
+    .stat-card .num { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--light); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: linear-gradient(to bottom, var(--accent), var(--accent2));
+      border-radius: 2px;
+    }
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -2.45rem; top: 0.4rem;
+      width: 14px; height: 14px; background: var(--accent); border-radius: 50%;
+      border: 3px solid var(--light);
+    }
+    .exp-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.75rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; }
+    .exp-title { font-size: 1.1rem; font-weight: 700; }
+    .exp-company { color: var(--accent); font-weight: 600; margin-top: 0.2rem; }
+    .exp-date {
+      background: rgba(59,130,246,0.1); color: var(--accent); padding: 0.3rem 0.8rem;
+      border-radius: 999px; font-size: 0.8rem; font-weight: 500; white-space: nowrap;
+    }
+    .exp-card ul { margin-top: 1rem; padding-left: 1.2rem; }
+    .exp-card ul li { color: #475569; font-size: 0.92rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+    /* PROJECTS */
+    #projects { background: #fff; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(59,130,246,0.12); }
+    .project-icon {
+      width: 50px; height: 50px; background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1rem;
+    }
+    .project-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .project-card .project-org { color: var(--accent); font-size: 0.85rem; font-weight: 500; margin-bottom: 0.75rem; }
+    .project-card p { color: #475569; font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      background: rgba(59,130,246,0.08); color: var(--accent); border: 1px solid rgba(59,130,246,0.2);
+      padding: 0.25rem 0.65rem; border-radius: 999px; font-size: 0.75rem; font-weight: 500;
+    }
+    .project-highlights { margin-top: 0.75rem; padding-left: 1.1rem; }
+    .project-highlights li { color: #475569; font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.3rem; }
+
+    /* SKILLS */
+    #skills { background: var(--light); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-category {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;
+    }
+    .skill-category h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem; color: var(--primary); }
+    .skill-category h4 span { color: var(--accent); }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-pill {
+      background: var(--light); border: 1px solid var(--border); color: #334155;
+      padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8rem;
+    }
+
+    /* EDUCATION */
+    #education { background: #fff; }
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .edu-card {
+      background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem;
+    }
+    .edu-card .degree { font-size: 1rem; font-weight: 700; }
+    .edu-card .school { color: var(--accent); font-weight: 600; margin: 0.3rem 0; }
+    .edu-card .meta { color: var(--muted); font-size: 0.85rem; }
+    .edu-card .courses { margin-top: 0.75rem; color: #475569; font-size: 0.88rem; line-height: 1.6; }
+
+    /* CONTACT */
+    #contact { background: linear-gradient(135deg, #0f172a, #1e3a5f); color: #fff; text-align: center; }
+    #contact .section-title { color: #fff; }
+    #contact .section-sub { color: #94a3b8; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 0.75rem 1.5rem;
+      border-radius: 10px; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;
+    }
+    .contact-link:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #0f172a; color: #475569; text-align: center; padding: 1.5rem; font-size: 0.85rem; }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ganesh</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Supply Chain & Data Analytics</div>
+    <h1>Hi, I'm <span>Ganesh</span><br/>Supply Chain Analyst</h1>
+    <p>3+ years driving supply chain excellence through data analytics, procurement optimization, and end-to-end operational visibility across FMCG and MRO distribution industries.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Supply chain professional passionate about turning data into decisions</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a Supply Chain Analyst with 3+ years of experience across procurement, purchasing, inventory management, demand planning, and upstream supply chain analytics within the FMCG and distribution industries.</p>
+        <p>I specialize in supporting end-to-end supply chain operations through data analysis, supplier coordination, replenishment planning, and cross-functional collaboration with sourcing, production, warehouse, finance, and IT teams.</p>
+        <p>Proficient in <strong>Power BI, SAP, Tableau, SQL, and Advanced Excel</strong> for reporting automation, KPI tracking, and operational visibility.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card"><div class="num">3+</div><div class="label">Years Experience</div></div>
+        <div class="stat-card"><div class="num">$1.4M+</div><div class="label">Procurement Managed</div></div>
+        <div class="stat-card"><div class="num">35%</div><div class="label">Report Cycle Reduction</div></div>
+        <div class="stat-card"><div class="num">1.5M+</div><div class="label">Products Supported</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">My professional journey in supply chain analytics</p>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Supply Chain Analyst</div>
+              <div class="exp-company">Grainger</div>
+            </div>
+            <div class="exp-date">May 2025 – Present</div>
+          </div>
+          <ul>
+            <li>Supported upstream supply chain analytics for MRO distributor stocking 1.5M+ products across global DCs, branches, and supplier networks.</li>
+            <li>Reduced past-due purchase orders <strong>18%</strong> by redesigning exception reporting, escalation cadence, and stakeholder follow-up routines.</li>
+            <li>Improved forecast-to-purchase visibility <strong>22%</strong> by automating demand, inventory, allocation, and deployment dashboards in Power BI.</li>
+            <li>Shortened recurring report cycle time <strong>35%</strong> by troubleshooting legacy reports and standardizing SQL, Tableau, and Power BI outputs.</li>
+            <li>Developed ad hoc analytics for sourcing, purchasing, inventory, and supplier performance to support faster operational decision-making.</li>
+            <li>Partnered with IT teams to define reporting requirements, validate data logic, and support dashboard integration projects.</li>
+            <li>Maintained KPI reports covering OTIF, past-due POs, inventory deployment, allocation, replenishment, and purchasing compliance.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Purchasing Analyst</div>
+              <div class="exp-company">Kraft Heinz</div>
+            </div>
+            <div class="exp-date">2022 – 2024</div>
+          </div>
+          <ul>
+            <li>Managed <strong>$1.4M+</strong> annual procurement pipeline across 300+ raw material, packaging, and third-party manufacturing SKUs for FMCG production.</li>
+            <li>Converted <strong>70%</strong> of MRP-generated purchase requisitions into automated purchase orders by maintaining vendor, MOQ, lead-time, and pricing parameters.</li>
+            <li>Reduced procurement cycle time <strong>25%</strong> by streamlining PR-to-PO workflows, RFQ comparisons, supplier approvals, and exception-based buying.</li>
+            <li>Improved material availability <strong>18%</strong> by expediting critical ingredients, validating supplier capacity, and aligning seasonal demand with production plans.</li>
+            <li>Executed end-to-end P2P activities including SAP purchase order creation, supplier follow-ups, GRN coordination, and invoice issue resolution.</li>
+            <li>Led RFQ processes for seasonal, promotional, and custom B2B requirements, comparing supplier pricing, availability, lead times, and compliance.</li>
+            <li>Onboarded approved suppliers and contract manufacturers by coordinating documentation, quality checks, master data setup, and commercial terms.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">Academic <span>Projects</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Data-driven supply chain solutions built during graduate studies</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <h3>Demand Forecasting & Inventory Optimization Dashboard</h3>
+        <div class="project-org">Oklahoma Christian University — Retail Supply Chain</div>
+        <p>Built an interactive Power BI dashboard to analyze demand variability, stockout frequency, and safety stock levels across 500+ retail SKUs using SQL-extracted sales and inventory data.</p>
+        <ul class="project-highlights">
+          <li>Applied ABC-XYZ classification and time-series forecasting to segment SKUs by revenue contribution and demand volatility.</li>
+          <li>Enabled targeted replenishment strategies through demand volatility segmentation.</li>
+          <li>Identified <strong>$120K+</strong> in potential carrying cost savings via reorder point adjustments and EOQ optimization.</li>
+        </ul>
+        <div class="project-tags" style="margin-top:1rem;">
+          <span class="tag">Power BI</span>
+          <span class="tag">SQL</span>
+          <span class="tag">ABC-XYZ Analysis</span>
+          <span class="tag">EOQ Optimization</span>
+          <span class="tag">Time-Series Forecasting</span>
+          <span class="tag">Inventory Management</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🏭</div>
+        <h3>Supplier Performance & Strategic Sourcing Analysis</h3>
+        <div class="project-org">Oklahoma Christian University — Healthcare Supply Chain</div>
+        <p>Designed a supplier scorecard framework in Power BI using SAP-extracted procurement data to evaluate 50+ vendors on OTIF, lead time compliance, defect rate, and cost competitiveness.</p>
+        <ul class="project-highlights">
+          <li>Performed spend analysis and Kraljic matrix segmentation using SQL to classify suppliers into strategic, leverage, bottleneck, and non-critical categories.</li>
+          <li>Recommended dual-sourcing strategies for 8 critical-risk suppliers, reducing single-source dependency.</li>
+          <li>Improved supply continuity for high-priority medical device components.</li>
+        </ul>
+        <div class="project-tags" style="margin-top:1rem;">
+          <span class="tag">Power BI</span>
+          <span class="tag">SQL</span>
+          <span class="tag">SAP</span>
+          <span class="tag">Kraljic Matrix</span>
+          <span class="tag">Spend Analysis</span>
+          <span class="tag">Supplier Scorecard</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Tools and technologies I work with</p>
+    <div class="skills-grid">
+
+      <div class="skill-category">
+        <h4>📦 <span>Supply Chain & Planning</span></h4>
+        <div class="skill-pills">
+          <span class="skill-pill">Demand Forecasting</span>
+          <span class="skill-pill">Supply Planning</span>
+          <span class="skill-pill">Replenishment</span>
+          <span class="skill-pill">Inventory Management</span>
+          <span class="skill-pill">Allocation Planning</span>
+          <span class="skill-pill">MRP</span>
+          <span class="skill-pill">PR-to-PO Management</span>
+          <span class="skill-pill">Procurement</span>
+          <span class="skill-pill">Strategic Sourcing</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h4>📊 <span>Data & Analytics</span></h4>
+        <div class="skill-pills">
+          <span class="skill-pill">Power BI</span>
+          <span class="skill-pill">Tableau</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">Advanced Excel</span>
+          <span class="skill-pill">Pivot Tables</span>
+          <span class="skill-pill">VLOOKUP / XLOOKUP</span>
+          <span class="skill-pill">KPI Dashboards</span>
+          <span class="skill-pill">Reporting Automation</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h4>🖥️ <span>Systems & Tools</span></h4>
+        <div class="skill-pills">
+          <span class="skill-pill">SAP MM</span>
+          <span class="skill-pill">SAP MRP</span>
+          <span class="skill-pill">ERP Systems</span>
+          <span class="skill-pill">TMS</span>
+          <span class="skill-pill">WMS</span>
+          <span class="skill-pill">SharePoint</span>
+          <span class="skill-pill">Microsoft Office Suite</span>
+          <span class="skill-pill">Master Data Management</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h4>🤝 <span>Operations & Process</span></h4>
+        <div class="skill-pills">
+          <span class="skill-pill">Cross-Functional Collaboration</span>
+          <span class="skill-pill">Stakeholder Management</span>
+          <span class="skill-pill">Process Improvement</span>
+          <span class="skill-pill">Continuous Improvement</span>
+          <span class="skill-pill">Exception Management</span>
+          <span class="skill-pill">OTIF</span>
+          <span class="skill-pill">SLA Adherence</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <h2 class="section-title"><span>Education</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Academic foundation in supply chain and engineering</p>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <div class="degree">Master of Science — Science & Engineering</div>
+        <div class="school">Oklahoma Christian University</div>
+        <div class="meta">Graduated 2025  |  GPA: 3.5 / 4.0</div>
+        <div class="courses"><strong>Relevant Coursework:</strong> Supply Chain Management, Operations Management, Global Procurement, Logistics & Transportation, Business Analytics, ERP Systems.</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="degree">Bachelor of Technology — Computer Science & Engineering</div>
+        <div class="school">University (India)</div>
+        <div class="meta">2019 – 2023  |  GPA: 8.9 / 10</div>
+        <div class="courses">Strong foundation in computer science, data structures, and engineering principles — enabling a data-first approach to supply chain problem solving.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Get In <span style="color:var(--accent2)">Touch</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Open to supply chain analyst, procurement, and data analytics opportunities</p>
+    <div class="contact-links">
+      <a href="mailto:Ganeshsp209@gmail.com" class="contact-link">
+        ✉️ Ganeshsp209@gmail.com
+      </a>
+      <a href="tel:5126488441" class="contact-link">
+        📞 512-648-8441
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-link">
+        🔗 LinkedIn
+      </a>
+      <a href="#" class="contact-link">
+        📍 Texas, USA
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Ganesh · Supply Chain Analyst · Built with HTML & CSS · Hosted on GitHub Pages</p>
+</footer>
+
+</body>
+</html>
