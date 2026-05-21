@@ -4,285 +4,221 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ganesh | Supply Chain Analyst</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root{--bg:#060b14;--bg2:#0d1526;--card:#111827;--border:#1e2d45;--accent:#3b82f6;--accent2:#06b6d4;--green:#10b981;--orange:#f59e0b;--red:#ef4444;--text:#e2e8f0;--muted:#64748b;--white:#fff}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
-
-/* NAV */
-nav{position:fixed;top:0;width:100%;z-index:999;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(6,11,20,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:.5px;transition:color .2s}
-.nav-links a:hover{color:var(--accent)}
-.nav-cta{background:var(--accent);color:#fff;padding:.5rem 1.2rem;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600;transition:all .2s}
-.nav-cta:hover{background:#2563eb;transform:translateY(-1px)}
-
-/* HERO */
-#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:6rem 2rem 2rem}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(59,130,246,.15) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(6,182,212,.08) 0%,transparent 60%)}
-.grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.04) 1px,transparent 1px);background-size:60px 60px}
-.hero-inner{position:relative;z-index:2;max-width:900px;text-align:center}
-.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);color:var(--accent);padding:.4rem 1rem;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:2rem}
-.hero-tag .dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
-.hero-inner h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.8rem,7vw,5rem);font-weight:800;line-height:1.05;margin-bottom:1.5rem}
-.hero-inner h1 .line1{display:block;color:var(--white)}
-.hero-inner h1 .line2{display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-desc{color:var(--muted);font-size:1.1rem;line-height:1.8;max-width:620px;margin:0 auto 2.5rem}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:4rem}
-.btn{padding:.8rem 2rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .25s;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:.5rem}
-.btn-primary{background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;box-shadow:0 4px 20px rgba(59,130,246,.3)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,.4)}
-.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
-.hstat{text-align:center}
-.hstat .num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hstat .lbl{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:.2rem}
-
-/* SECTIONS */
-section{padding:6rem 2rem}
-.container{max-width:1100px;margin:0 auto}
-.sec-label{display:inline-block;color:var(--accent);font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.75rem}
-.sec-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;margin-bottom:.75rem}
-.sec-sub{color:var(--muted);font-size:1rem;line-height:1.7;max-width:560px}
-
-/* IMPACT STRIP */
-#impact{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem 2rem}
-.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
-.impact-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.75rem;text-align:center;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
-.impact-card:hover{transform:translateY(-4px);border-color:var(--accent)}
-.impact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-.impact-card .ic-num{font-family:'Space Grotesk',sans-serif;font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.impact-card .ic-label{color:var(--muted);font-size:.82rem;margin-top:.3rem}
-.impact-card .ic-icon{font-size:1.5rem;margin-bottom:.5rem}
-
-/* EXPERIENCE - STORY CARDS */
-#experience{background:var(--bg)}
-.exp-story{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
-.exp-story-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;transition:border-color .3s}
-.exp-story-card:hover{border-color:var(--accent)}
-.exp-story-card .company-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:var(--accent);padding:.4rem 1rem;border-radius:999px;font-size:.78rem;font-weight:700;margin-bottom:1.25rem}
-.exp-story-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:.4rem}
-.exp-story-card .period{color:var(--muted);font-size:.85rem;margin-bottom:1.25rem}
-.exp-story-card .story-text{color:#94a3b8;font-size:.92rem;line-height:1.8;margin-bottom:1.5rem}
-.exp-kpis{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.kpi-pill{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:.75rem;text-align:center}
-.kpi-pill .kv{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--green)}
-.kpi-pill .kl{font-size:.72rem;color:var(--muted);margin-top:.15rem}
-.exp-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem}
-.etag{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15);color:#93c5fd;padding:.25rem .65rem;border-radius:999px;font-size:.72rem}
-
-/* PROJECTS - INTERACTIVE DEMOS */
-#projects{background:var(--bg2)}
-.projects-tabs{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap}
-.ptab{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:.6rem 1.4rem;border-radius:999px;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .2s}
-.ptab.active,.ptab:hover{background:var(--accent);border-color:var(--accent);color:#fff}
-.project-demo{display:none}
-.project-demo.active{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
-.demo-info{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem}
-.demo-info .proj-tag{display:inline-block;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);color:var(--accent2);padding:.3rem .8rem;border-radius:999px;font-size:.75rem;font-weight:600;margin-bottom:1rem}
-.demo-info h3{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.75rem}
-.demo-info p{color:#94a3b8;font-size:.9rem;line-height:1.75;margin-bottom:1.25rem}
-.demo-outcomes{list-style:none;display:flex;flex-direction:column;gap:.6rem}
-.demo-outcomes li{display:flex;align-items:flex-start;gap:.6rem;color:#94a3b8;font-size:.88rem}
-.demo-outcomes li::before{content:'→';color:var(--accent);font-weight:700;flex-shrink:0}
-.demo-tech{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem}
-.demo-tech span{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);padding:.25rem .65rem;border-radius:6px;font-size:.75rem}
-.demo-visual{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.5rem;min-height:380px;display:flex;flex-direction:column}
-.demo-visual h4{font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.5px}
-.chart-wrap{flex:1;position:relative;min-height:280px}
-
-/* ABC MATRIX */
-.abc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;height:100%}
-.abc-cell{border-radius:10px;padding:1rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;transition:transform .2s}
-.abc-cell:hover{transform:scale(1.04)}
-.abc-cell .cell-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem}
-.abc-cell .cell-count{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700}
-.abc-cell .cell-sub{font-size:.68rem;margin-top:.2rem;opacity:.7}
-.cell-ax{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:var(--green)}
-.cell-ay{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);color:var(--orange)}
-.cell-az{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red)}
-.cell-bx{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:var(--accent)}
-.cell-by{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:#a78bfa}
-.cell-bz{background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.2);color:#f472b6}
-.cell-cx{background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);color:var(--accent2)}
-.cell-cy{background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.2);color:var(--muted)}
-.cell-cz{background:rgba(100,116,139,.08);border:1px solid rgba(100,116,139,.15);color:#475569}
-.abc-legend{display:flex;gap:1rem;margin-top:.75rem;flex-wrap:wrap}
-.abc-legend span{font-size:.72rem;color:var(--muted)}
-
-/* SUPPLIER SCORECARD */
-.scorecard-table{width:100%;border-collapse:collapse;font-size:.82rem}
-.scorecard-table th{color:var(--muted);font-weight:600;text-align:left;padding:.6rem .75rem;border-bottom:1px solid var(--border);font-size:.75rem;text-transform:uppercase;letter-spacing:.5px}
-.scorecard-table td{padding:.65rem .75rem;border-bottom:1px solid rgba(30,45,69,.5)}
-.scorecard-table tr:hover td{background:rgba(59,130,246,.04)}
-.score-bar-wrap{background:rgba(255,255,255,.06);border-radius:999px;height:6px;width:80px;overflow:hidden}
-.score-bar{height:100%;border-radius:999px;transition:width .8s ease}
-.badge-strategic{background:rgba(16,185,129,.15);color:var(--green);padding:.2rem .6rem;border-radius:999px;font-size:.7rem;font-weight:600}
-.badge-leverage{background:rgba(59,130,246,.15);color:var(--accent);padding:.2rem .6rem;border-radius:999px;font-size:.7rem;font-weight:600}
-.badge-bottleneck{background:rgba(245,158,11,.15);color:var(--orange);padding:.2rem .6rem;border-radius:999px;font-size:.7rem;font-weight:600}
-.badge-noncrit{background:rgba(100,116,139,.15);color:var(--muted);padding:.2rem .6rem;border-radius:999px;font-size:.7rem;font-weight:600}
-
-/* SKILLS */
-#skills{background:var(--bg)}
-.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-.skill-block{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.75rem}
-.skill-block h4{font-size:.9rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
-.skill-row{margin-bottom:1rem}
-.skill-row .sr-top{display:flex;justify-content:space-between;margin-bottom:.4rem}
-.skill-row .sr-name{font-size:.85rem;color:var(--text)}
-.skill-row .sr-pct{font-size:.8rem;color:var(--accent);font-weight:600}
-.skill-bar-bg{background:rgba(255,255,255,.06);border-radius:999px;height:6px;overflow:hidden}
-.skill-bar{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.2s ease}
-.tool-chips{display:flex;flex-wrap:wrap;gap:.5rem}
-.tool-chip{background:rgba(255,255,255,.05);border:1px solid var(--border);color:#94a3b8;padding:.35rem .8rem;border-radius:8px;font-size:.78rem;transition:all .2s;cursor:default}
-.tool-chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(59,130,246,.08)}
-
-/* SUPPLY CHAIN FLOW */
-#scflow{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.flow-container{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin-top:2rem}
-.flow-node{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1rem;text-align:center;min-width:110px;cursor:pointer;transition:all .25s;position:relative}
-.flow-node:hover,.flow-node.active{border-color:var(--accent);background:rgba(59,130,246,.08);transform:translateY(-4px)}
-.flow-node .fn-icon{font-size:1.6rem;margin-bottom:.4rem}
-.flow-node .fn-label{font-size:.75rem;font-weight:600;color:var(--text)}
-.flow-node .fn-sub{font-size:.65rem;color:var(--muted);margin-top:.15rem}
-.flow-arrow{color:var(--border);font-size:1.2rem;padding:0 .25rem;flex-shrink:0}
-.flow-detail{background:var(--card);border:1px solid var(--accent);border-radius:16px;padding:1.75rem;margin-top:1.5rem;display:none}
-.flow-detail.show{display:block}
-.flow-detail h4{color:var(--accent);font-weight:700;margin-bottom:.75rem}
-.flow-detail p{color:#94a3b8;font-size:.9rem;line-height:1.7}
-
-/* EDUCATION */
-#education{background:var(--bg)}
-.edu-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.edu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:border-color .2s}
-.edu-card:hover{border-color:var(--accent)}
-.edu-card .edu-icon{font-size:2rem;margin-bottom:1rem}
-.edu-card .degree{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.3rem}
-.edu-card .school{color:var(--accent);font-weight:600;font-size:.9rem;margin-bottom:.3rem}
-.edu-card .meta{color:var(--muted);font-size:.82rem;margin-bottom:1rem}
-.edu-card .gpa-badge{display:inline-block;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green);padding:.25rem .75rem;border-radius:999px;font-size:.78rem;font-weight:700;margin-bottom:1rem}
-.course-pills{display:flex;flex-wrap:wrap;gap:.4rem}
-.course-pill{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted);padding:.2rem .6rem;border-radius:6px;font-size:.72rem}
-
-/* CONTACT */
-#contact{background:var(--bg2)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
-.contact-left h2{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;margin-bottom:1rem}
-.contact-left p{color:var(--muted);line-height:1.8;margin-bottom:2rem}
-.contact-links{display:flex;flex-direction:column;gap:.75rem}
-.clink{display:flex;align-items:center;gap:.75rem;color:var(--text);text-decoration:none;font-size:.9rem;transition:color .2s}
-.clink:hover{color:var(--accent)}
-.clink .ci{width:38px;height:38px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.contact-right{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem}
-.contact-right h4{font-weight:700;margin-bottom:1.5rem}
-.form-group{margin-bottom:1.25rem}
-.form-group label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:.4rem;font-weight:500}
-.form-group input,.form-group textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-size:.9rem;font-family:'Inter',sans-serif;transition:border-color .2s;outline:none}
-.form-group input:focus,.form-group textarea:focus{border-color:var(--accent)}
-.form-group textarea{resize:vertical;min-height:100px}
-.form-submit{width:100%;background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;border:none;border-radius:10px;padding:.85rem;font-weight:600;font-size:.95rem;cursor:pointer;transition:all .2s}
-.form-submit:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,.3)}
-
-/* FOOTER */
-footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:.82rem}
-footer a{color:var(--accent);text-decoration:none}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .nav-links{display:none}
-  .exp-story,.project-demo.active,.skills-layout,.edu-cards,.contact-grid{grid-template-columns:1fr}
-  .flow-container{gap:.5rem}
-  .flow-arrow{display:none}
-}
-
-/* ANIMATIONS */
-.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.fade-up.visible{opacity:1;transform:translateY(0)}
+  :root{--navy:#0a192f;--teal:#64ffda;--slate:#8892b0;--light:#ccd6f6;--white:#e6f1ff;--card:#112240;--accent:#233554;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--navy);color:var(--light);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;}
+  a{color:var(--teal);text-decoration:none;}
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;background:rgba(10,25,47,.95);backdrop-filter:blur(10px);z-index:999;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(100,255,218,.1);}
+  .logo{font-size:1.4rem;font-weight:700;color:var(--teal);}
+  .nav-links{display:flex;gap:1.5rem;list-style:none;}
+  .nav-links a{color:var(--slate);font-size:.9rem;transition:.3s;}
+  .nav-links a:hover{color:var(--teal);}
+  /* HERO */
+  #hero{min-height:100vh;display:flex;align-items:center;padding:6rem 10% 4rem;position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(100,255,218,.05) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(100,255,218,.03) 0%,transparent 50%);}
+  .hero-content{max-width:700px;position:relative;z-index:1;}
+  .hero-tag{color:var(--teal);font-size:.95rem;letter-spacing:2px;margin-bottom:1rem;}
+  .hero-name{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:.5rem;}
+  .hero-title{font-size:clamp(1.2rem,3vw,2rem);color:var(--slate);margin-bottom:1.5rem;}
+  .hero-desc{color:var(--slate);max-width:540px;margin-bottom:2.5rem;font-size:1rem;}
+  .hero-stats{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+  .stat-box{text-align:center;}
+  .stat-num{font-size:2rem;font-weight:800;color:var(--teal);}
+  .stat-label{font-size:.75rem;color:var(--slate);letter-spacing:1px;text-transform:uppercase;}
+  .btn{display:inline-block;padding:.75rem 1.75rem;border:1px solid var(--teal);color:var(--teal);border-radius:4px;font-size:.9rem;transition:.3s;margin-right:1rem;}
+  .btn:hover{background:rgba(100,255,218,.1);}
+  .btn-fill{background:var(--teal);color:var(--navy);font-weight:700;}
+  .btn-fill:hover{background:rgba(100,255,218,.85);}
+  /* SECTIONS */
+  section{padding:5rem 10%;}
+  .section-label{color:var(--teal);font-size:.85rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:.5rem;}
+  .section-title{font-size:clamp(1.6rem,3vw,2.2rem);color:var(--white);font-weight:700;margin-bottom:.5rem;}
+  .section-line{width:60px;height:3px;background:var(--teal);margin-bottom:2.5rem;border-radius:2px;}
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .about-text p{color:var(--slate);margin-bottom:1rem;font-size:1rem;}
+  .about-text strong{color:var(--light);}
+  .about-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .about-card{background:var(--card);border:1px solid rgba(100,255,218,.1);border-radius:8px;padding:1.25rem;text-align:center;}
+  .about-card .num{font-size:1.8rem;font-weight:800;color:var(--teal);}
+  .about-card .lbl{font-size:.75rem;color:var(--slate);margin-top:.25rem;}
+  /* EXPERIENCE */
+  .exp-timeline{position:relative;padding-left:2rem;}
+  .exp-timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--teal),transparent);}
+  .exp-item{position:relative;margin-bottom:3rem;}
+  .exp-item::before{content:'';position:absolute;left:-2.4rem;top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--teal);border:2px solid var(--navy);}
+  .exp-header{background:var(--card);border:1px solid rgba(100,255,218,.1);border-radius:10px;padding:1.5rem 2rem;cursor:pointer;transition:.3s;}
+  .exp-header:hover{border-color:var(--teal);}
+  .exp-company{font-size:1.2rem;font-weight:700;color:var(--white);}
+  .exp-role{color:var(--teal);font-size:.9rem;margin:.2rem 0;}
+  .exp-period{color:var(--slate);font-size:.8rem;}
+  .exp-body{background:var(--card);border:1px solid rgba(100,255,218,.08);border-top:none;border-radius:0 0 10px 10px;padding:0 2rem;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .3s;}
+  .exp-body.open{max-height:1200px;padding:1.5rem 2rem;}
+  .exp-story{color:var(--slate);font-size:.95rem;line-height:1.8;margin-bottom:1.5rem;}
+  .exp-story strong{color:var(--light);}
+  .kpi-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem;}
+  .kpi-chip{background:rgba(100,255,218,.08);border:1px solid rgba(100,255,218,.2);color:var(--teal);padding:.35rem .85rem;border-radius:20px;font-size:.8rem;font-weight:600;}
+  .exp-tools{display:flex;flex-wrap:wrap;gap:.5rem;}
+  .tool-tag{background:var(--accent);color:var(--light);padding:.25rem .7rem;border-radius:4px;font-size:.75rem;}
+  /* PROJECTS */
+  .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+  .project-card{background:var(--card);border:1px solid rgba(100,255,218,.1);border-radius:12px;padding:2rem;transition:.3s;position:relative;overflow:hidden;}
+  .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),transparent);}
+  .project-card:hover{transform:translateY(-4px);border-color:var(--teal);}
+  .project-icon{font-size:2rem;margin-bottom:1rem;}
+  .project-title{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.5rem;}
+  .project-org{color:var(--teal);font-size:.8rem;margin-bottom:1rem;}
+  .project-desc{color:var(--slate);font-size:.9rem;margin-bottom:1.5rem;}
+  .project-impact{background:rgba(100,255,218,.05);border-left:3px solid var(--teal);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:1.5rem;}
+  .project-impact span{color:var(--teal);font-weight:700;}
+  .demo-btn{background:transparent;border:1px solid var(--teal);color:var(--teal);padding:.5rem 1.2rem;border-radius:4px;cursor:pointer;font-size:.85rem;transition:.3s;width:100%;}
+  .demo-btn:hover{background:rgba(100,255,218,.1);}
+  /* DEMO MODALS */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;align-items:center;justify-content:center;padding:1rem;}
+  .modal-overlay.active{display:flex;}
+  .modal{background:var(--card);border:1px solid rgba(100,255,218,.2);border-radius:16px;padding:2rem;max-width:900px;width:100%;max-height:90vh;overflow-y:auto;position:relative;}
+  .modal-close{position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:var(--slate);font-size:1.5rem;cursor:pointer;}
+  .modal-close:hover{color:var(--teal);}
+  .modal-title{font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:.5rem;}
+  .modal-sub{color:var(--teal);font-size:.85rem;margin-bottom:1.5rem;}
+  /* ABC-XYZ Matrix */
+  .matrix-wrap{overflow-x:auto;}
+  .matrix-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;}
+  .matrix-table th,.matrix-table td{border:1px solid rgba(100,255,218,.15);padding:.75rem;text-align:center;font-size:.85rem;}
+  .matrix-table th{background:var(--accent);color:var(--teal);}
+  .matrix-cell{cursor:pointer;transition:.3s;border-radius:4px;}
+  .matrix-cell:hover{background:rgba(100,255,218,.15)!important;}
+  .cell-AX{background:rgba(100,255,218,.12);}
+  .cell-AY{background:rgba(100,200,218,.08);}
+  .cell-AZ{background:rgba(100,150,218,.06);}
+  .cell-BX{background:rgba(100,255,180,.08);}
+  .cell-BY{background:rgba(100,200,180,.06);}
+  .cell-BZ{background:rgba(80,150,180,.05);}
+  .cell-CX{background:rgba(80,200,150,.06);}
+  .cell-CY{background:rgba(80,150,150,.04);}
+  .cell-CZ{background:rgba(60,100,120,.04);}
+  .matrix-info{background:rgba(100,255,218,.05);border:1px solid rgba(100,255,218,.15);border-radius:8px;padding:1rem;min-height:80px;color:var(--light);font-size:.9rem;}
+  /* Supplier Scorecard */
+  .scorecard-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;}
+  .scorecard-table th{background:var(--accent);color:var(--teal);padding:.6rem .8rem;text-align:left;font-size:.8rem;}
+  .scorecard-table td{padding:.6rem .8rem;border-bottom:1px solid rgba(100,255,218,.08);font-size:.82rem;color:var(--light);}
+  .score-bar{height:8px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;}
+  .score-fill{height:100%;border-radius:4px;transition:width 1s ease;}
+  .badge{padding:.2rem .6rem;border-radius:12px;font-size:.7rem;font-weight:700;}
+  .badge-green{background:rgba(100,255,150,.15);color:#64ff96;}
+  .badge-yellow{background:rgba(255,220,100,.15);color:#ffdc64;}
+  .badge-red{background:rgba(255,100,100,.15);color:#ff6464;}
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+  .skill-category{background:var(--card);border:1px solid rgba(100,255,218,.1);border-radius:10px;padding:1.5rem;}
+  .skill-cat-title{color:var(--teal);font-size:.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem;}
+  .skill-item{margin-bottom:.85rem;}
+  .skill-name{display:flex;justify-content:space-between;color:var(--light);font-size:.85rem;margin-bottom:.3rem;}
+  .skill-bar{height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
+  .skill-fill{height:100%;background:linear-gradient(90deg,var(--teal),rgba(100,255,218,.5));border-radius:3px;width:0;transition:width 1.2s ease;}
+  /* EDUCATION */
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+  .edu-card{background:var(--card);border:1px solid rgba(100,255,218,.1);border-radius:10px;padding:2rem;}
+  .edu-degree{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.25rem;}
+  .edu-school{color:var(--teal);font-size:.9rem;margin-bottom:.5rem;}
+  .edu-meta{color:var(--slate);font-size:.82rem;margin-bottom:1rem;}
+  .edu-courses{display:flex;flex-wrap:wrap;gap:.4rem;}
+  .course-tag{background:var(--accent);color:var(--slate);padding:.2rem .6rem;border-radius:4px;font-size:.72rem;}
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+  .contact-info p{color:var(--slate);margin-bottom:1.5rem;}
+  .contact-item{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;color:var(--light);}
+  .contact-icon{width:40px;height:40px;background:rgba(100,255,218,.08);border:1px solid rgba(100,255,218,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+  .contact-form{background:var(--card);border:1px solid rgba(100,255,218,.1);border-radius:12px;padding:2rem;}
+  .form-group{margin-bottom:1.25rem;}
+  .form-group label{display:block;color:var(--slate);font-size:.85rem;margin-bottom:.4rem;}
+  .form-group input,.form-group textarea{width:100%;background:var(--accent);border:1px solid rgba(100,255,218,.15);border-radius:6px;padding:.75rem 1rem;color:var(--light);font-size:.9rem;outline:none;transition:.3s;}
+  .form-group input:focus,.form-group textarea:focus{border-color:var(--teal);}
+  .form-group textarea{height:120px;resize:vertical;}
+  .submit-btn{width:100%;background:var(--teal);color:var(--navy);border:none;padding:.85rem;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;transition:.3s;}
+  .submit-btn:hover{background:rgba(100,255,218,.85);}
+  /* FOOTER */
+  footer{text-align:center;padding:2rem;color:var(--slate);font-size:.85rem;border-top:1px solid rgba(100,255,218,.08);}
+  /* CHART CONTAINERS */
+  .chart-container{position:relative;height:280px;margin-bottom:1.5rem;}
+  /* SCM FLOW */
+  .flow-wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1.5rem;}
+  .flow-node{background:var(--accent);border:2px solid rgba(100,255,218,.2);border-radius:10px;padding:1rem 1.5rem;cursor:pointer;text-align:center;transition:.3s;min-width:120px;}
+  .flow-node:hover,.flow-node.active{border-color:var(--teal);background:rgba(100,255,218,.08);}
+  .flow-node-icon{font-size:1.5rem;margin-bottom:.3rem;}
+  .flow-node-label{font-size:.8rem;color:var(--light);font-weight:600;}
+  .flow-arrow{display:flex;align-items:center;color:var(--teal);font-size:1.2rem;}
+  .flow-detail{background:rgba(100,255,218,.05);border:1px solid rgba(100,255,218,.15);border-radius:8px;padding:1.25rem;min-height:100px;color:var(--light);font-size:.9rem;line-height:1.7;}
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .about-grid,.projects-grid,.edu-grid,.contact-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:1rem;}
+    nav .nav-links{display:none;}
+    section{padding:4rem 5%;}
+    #hero{padding:6rem 5% 4rem;}
+  }
+  /* SCROLL ANIMATION */
+  .fade-in{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:none;}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">G.</div>
+  <div class="logo">GS</div>
   <ul class="nav-links">
-    <li><a href="#impact">Impact</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#scflow">SCM Flow</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="mailto:Ganeshsp209@gmail.com" class="nav-cta">Hire Me</a>
+  <a href="mailto:Ganeshsp209@gmail.com" class="btn">Hire Me</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="grid-overlay"></div>
-  <div class="hero-inner">
-    <div class="hero-tag"><span class="dot"></span> Open to Opportunities · Texas, USA</div>
-    <h1>
-      <span class="line1">Supply Chain Analyst</span>
-      <span class="line2">Who Turns Data Into Decisions</span>
-    </h1>
-    <p class="hero-desc">I bridge the gap between complex supply chain operations and actionable intelligence — using Power BI, SQL, SAP, and analytics to drive measurable business outcomes across FMCG and MRO distribution.</p>
-    <div class="hero-btns">
-      <a href="#projects" class="btn btn-primary">▶ View Live Demos</a>
-      <a href="#experience" class="btn btn-ghost">My Story →</a>
-    </div>
+  <div class="hero-content">
+    <p class="hero-tag">👋 Hello, I'm</p>
+    <h1 class="hero-name">Ganesh</h1>
+    <h2 class="hero-title">Supply Chain Analyst</h2>
+    <p class="hero-desc">Turning complex supply chain data into decisions that move products, reduce costs, and keep operations running. 3+ years across FMCG procurement and MRO analytics.</p>
     <div class="hero-stats">
-      <div class="hstat"><div class="num" data-target="3">0</div><div class="lbl">Years Experience</div></div>
-      <div class="hstat"><div class="num" data-target="1.4" data-prefix="$" data-suffix="M+">0</div><div class="lbl">Procurement Managed</div></div>
-      <div class="hstat"><div class="num" data-target="1.5" data-suffix="M+">0</div><div class="lbl">Products Supported</div></div>
-      <div class="hstat"><div class="num" data-target="120" data-prefix="$" data-suffix="K+">0</div><div class="lbl">Cost Savings Identified</div></div>
+      <div class="stat-box"><div class="stat-num" data-target="1.4" data-prefix="$" data-suffix="M+">$0M</div><div class="stat-label">Procurement Managed</div></div>
+      <div class="stat-box"><div class="stat-num" data-target="1.5" data-prefix="" data-suffix="M+ SKUs">0</div><div class="stat-label">Products Analyzed</div></div>
+      <div class="stat-box"><div class="stat-num" data-target="35" data-prefix="" data-suffix="%">0%</div><div class="stat-label">Report Cycle Reduced</div></div>
+      <div class="stat-box"><div class="stat-num" data-target="120" data-prefix="$" data-suffix="K+">$0</div><div class="stat-label">Cost Savings Identified</div></div>
     </div>
+    <a href="#projects" class="btn btn-fill">View My Work</a>
+    <a href="#contact" class="btn">Get In Touch</a>
   </div>
 </section>
 
-<!-- IMPACT STRIP -->
-<section id="impact">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:2rem">
-      <span class="sec-label">Measurable Results</span>
-      <h2 class="sec-title" style="text-align:center">Impact by the Numbers</h2>
-    </div>
-    <div class="impact-grid">
-      <div class="impact-card fade-up">
-        <div class="ic-icon">📉</div>
-        <div class="ic-num">18%</div>
-        <div class="ic-label">Reduction in Past-Due POs at Grainger</div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="fade-in">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a supply chain professional who sits at the intersection of <strong>data analytics and operations</strong>. My work isn't just about running reports — it's about finding the story in the numbers and translating it into action that prevents stockouts, reduces costs, and keeps supply chains resilient.</p>
+        <p>At <strong>Grainger</strong>, I work with datasets covering 1.5M+ MRO products across global distribution centers, building the dashboards and analytics that purchasing and planning teams rely on every day. Before that, at <strong>Kraft Heinz</strong>, I managed a $1.4M procurement pipeline — from morning MRP runs to resolving supplier crises before they hit the production floor.</p>
+        <p>I'm fluent in <strong>SAP, Power BI, SQL, Tableau, and Excel</strong> — not just as tools, but as languages for solving real operational problems. Whether it's redesigning an exception report that cuts past-due POs by 18%, or building a supplier scorecard that flags risk before it becomes a disruption, I bring both the technical depth and the business context.</p>
+        <p>Based in <strong>Texas</strong> | Open to hybrid & remote roles</p>
       </div>
-      <div class="impact-card fade-up">
-        <div class="ic-icon">📊</div>
-        <div class="ic-num">22%</div>
-        <div class="ic-label">Improved Forecast-to-Purchase Visibility</div>
-      </div>
-      <div class="impact-card fade-up">
-        <div class="ic-icon">⚡</div>
-        <div class="ic-num">35%</div>
-        <div class="ic-label">Faster Report Cycle Time</div>
-      </div>
-      <div class="impact-card fade-up">
-        <div class="ic-icon">🔄</div>
-        <div class="ic-num">25%</div>
-        <div class="ic-label">Procurement Cycle Time Reduction at Kraft Heinz</div>
-      </div>
-      <div class="impact-card fade-up">
-        <div class="ic-icon">🤖</div>
-        <div class="ic-num">70%</div>
-        <div class="ic-label">PR-to-PO Automation Rate</div>
+      <div class="about-cards">
+        <div class="about-card"><div class="num">3+</div><div class="lbl">Years Experience</div></div>
+        <div class="about-card"><div class="num">300+</div><div class="lbl">SKUs Managed</div></div>
+        <div class="about-card"><div class="num">18%</div><div class="lbl">Past-Due PO Reduction</div></div>
+        <div class="about-card"><div class="num">70%</div><div class="lbl">PR→PO Automation</div></div>
       </div>
     </div>
   </div>
@@ -290,245 +226,196 @@ footer a{color:var(--accent);text-decoration:none}
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="container">
-    <span class="sec-label">Career Journey</span>
-    <h2 class="sec-title">Where I've Made an Impact</h2>
-    <p class="sec-sub" style="margin-bottom:3rem">Not just job titles — real problems solved, real results delivered.</p>
+  <div class="fade-in">
+    <p class="section-label">Where I've Worked</p>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+    <div class="exp-timeline">
 
-    <div class="exp-story">
       <!-- Grainger -->
-      <div class="exp-story-card fade-up">
-        <div class="company-badge">🏭 Grainger · MRO Distribution</div>
-        <h3>Supply Chain Analyst</h3>
-        <div class="period">May 2025 – Present · Texas, USA</div>
-        <p class="story-text">
-          Grainger stocks over <strong>1.5 million products</strong> across global distribution centers. My role sits at the intersection of data and operations — I own the analytics layer that keeps upstream supply chain decisions fast and accurate. When I joined, legacy reports were slow, inconsistent, and manually intensive. I rebuilt the reporting infrastructure from the ground up using SQL and Power BI, cutting cycle time by 35% and giving stakeholders real-time visibility into inventory deployment, OTIF, and purchasing compliance.
-        </p>
-        <div class="exp-kpis">
-          <div class="kpi-pill"><div class="kv">18%↓</div><div class="kl">Past-Due POs</div></div>
-          <div class="kpi-pill"><div class="kv">22%↑</div><div class="kl">Forecast Visibility</div></div>
-          <div class="kpi-pill"><div class="kv">35%↓</div><div class="kl">Report Cycle Time</div></div>
-          <div class="kpi-pill"><div class="kv">1.5M+</div><div class="kl">SKUs Supported</div></div>
+      <div class="exp-item">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+            <div>
+              <div class="exp-company">Grainger</div>
+              <div class="exp-role">Supply Chain Analyst</div>
+              <div class="exp-period">May 2025 – Present · MRO Distribution · Texas</div>
+            </div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+              <span class="kpi-chip">↓18% Past-Due POs</span>
+              <span class="kpi-chip">↑22% Forecast Visibility</span>
+              <span class="kpi-chip">↓35% Report Cycle</span>
+            </div>
+          </div>
         </div>
-        <div class="exp-tags">
-          <span class="etag">Power BI</span><span class="etag">SQL</span><span class="etag">Tableau</span>
-          <span class="etag">OTIF Tracking</span><span class="etag">Inventory Analytics</span><span class="etag">MRP</span>
+        <div class="exp-body">
+          <p class="exp-story">
+            Every morning at Grainger starts the same way: open Power BI, scan the overnight KPI refresh, and look for red flags. With <strong>1.5 million+ MRO products</strong> flowing through global distribution centers, branches, and supplier networks, even a 1% anomaly in past-due purchase orders means thousands of line items at risk.
+          </p>
+          <p class="exp-story">
+            When I joined, the past-due PO rate was running at <strong>~11.5%</strong> of open lines. I redesigned the exception reporting from scratch — building a tiered aging report in Power BI that categorized POs by severity (1–3 days, 4–7 days, 8+ days) and establishing a structured escalation cadence. Purchasing coordinators handled the short-aged items; managers got the 4–7 day cases; sourcing leads owned anything 8+ days. Within 6 months, the rate dropped to <strong>~9.4% — an 18% reduction</strong>.
+          </p>
+          <p class="exp-story">
+            The bigger challenge was visibility. Demand forecasts lived in one Excel file, inventory levels in SAP, PO status in another system, deployment plans in yet another tool. I wrote SQL queries to consolidate these into a unified data model and built interactive Power BI dashboards that let planners drill from forecast → inventory → PO → deployment at the SKU/DC level. The result: a <strong>22% improvement in forecast-to-purchase visibility</strong>, measured by a reduction in "blind spot" incidents where gaps were discovered reactively.
+          </p>
+          <p class="exp-story">
+            I also inherited a portfolio of legacy reports that took 4–6 hours each to produce manually. By troubleshooting broken SQL joins, optimizing WHERE clauses, and migrating Tableau workbooks to Power BI, I cut the average report cycle from <strong>~5 hours to ~3.25 hours — a 35% reduction</strong>, freeing up 10–12 analyst-hours per week for higher-value work.
+          </p>
+          <div class="exp-tools">
+            <span class="tool-tag">Power BI</span><span class="tool-tag">SQL</span><span class="tool-tag">Tableau</span><span class="tool-tag">SAP</span><span class="tool-tag">DAX</span><span class="tool-tag">Excel</span><span class="tool-tag">SharePoint</span>
+          </div>
         </div>
       </div>
 
       <!-- Kraft Heinz -->
-      <div class="exp-story-card fade-up">
-        <div class="company-badge">🥫 Kraft Heinz · FMCG</div>
-        <h3>Purchasing Analyst</h3>
-        <div class="period">2022 – 2024 · FMCG Production</div>
-        <p class="story-text">
-          Managing a <strong>$1.4M+ annual procurement pipeline</strong> across 300+ SKUs in a high-velocity FMCG environment taught me that speed and accuracy aren't trade-offs — they're both required. I automated 70% of MRP-generated purchase requisitions into purchase orders, eliminating manual bottlenecks. By aligning seasonal demand signals with supplier capacity, I improved material availability by 18% and cut procurement cycle time by 25% — keeping production lines running without interruption.
-        </p>
-        <div class="exp-kpis">
-          <div class="kpi-pill"><div class="kv">$1.4M+</div><div class="kl">Pipeline Managed</div></div>
-          <div class="kpi-pill"><div class="kv">70%</div><div class="kl">PO Automation</div></div>
-          <div class="kpi-pill"><div class="kv">25%↓</div><div class="kl">Cycle Time</div></div>
-          <div class="kpi-pill"><div class="kv">300+</div><div class="kl">SKUs Managed</div></div>
+      <div class="exp-item">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+            <div>
+              <div class="exp-company">Kraft Heinz</div>
+              <div class="exp-role">Purchasing Analyst</div>
+              <div class="exp-period">2022 – 2024 · FMCG · Food & Beverage</div>
+            </div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+              <span class="kpi-chip">$1.4M+ Pipeline</span>
+              <span class="kpi-chip">↓25% Cycle Time</span>
+              <span class="kpi-chip">70% PR→PO Auto</span>
+            </div>
+          </div>
         </div>
-        <div class="exp-tags">
-          <span class="etag">SAP MM</span><span class="etag">SAP MRP</span><span class="etag">P2P</span>
-          <span class="etag">RFQ Management</span><span class="etag">Supplier Onboarding</span><span class="etag">Excel</span>
+        <div class="exp-body">
+          <p class="exp-story">
+            At Kraft Heinz, the day started at 7 AM with SAP. The overnight MRP run had already processed production schedules, inventory levels, and lead times to generate a fresh batch of <strong>40–80 purchase requisitions</strong> — covering everything from tomato paste and vinegar to glass bottles, caps, and shrink-wrap film. My job was to turn those requisitions into purchase orders before the production floor needed them.
+          </p>
+          <p class="exp-story">
+            The problem when I arrived: only <strong>40% of PRs converted automatically</strong>. The rest required manual intervention because vendor parameters were stale — wrong lead times, incorrect MOQs, expired pricing agreements. I spent three weeks auditing material master records for all 300+ SKUs, confirming lead times directly with each supplier, correcting MOQs, and updating pricing info records. After the cleanup, <strong>70% of PRs converted to POs automatically</strong>, saving 8–10 hours of manual processing per week.
+          </p>
+          <p class="exp-story">
+            The most intense moment came during a peak season crisis: a key tomato paste supplier notified me <strong>10 days before a major delivery</strong> that they could only fulfill 60% of the order due to a poor harvest. That ingredient was critical for ketchup and pasta sauces — 35% of the plant's monthly output. Within 48 hours, I activated the backup supplier list, issued emergency RFQs, and secured a commitment from a secondary supplier at a 7% price premium. I coordinated with the production planner to resequence the line — running pasta sauce first while the supplementary shipment was in transit. <strong>Zero production downtime.</strong>
+          </p>
+          <p class="exp-story">
+            I also resolved a backlog of <strong>25+ invoices stuck in three-way match failures</strong>, delaying supplier payments by 15–20 days. Root cause analysis revealed 40% were GRN posting delays, 35% were pricing mismatches, and 25% were quantity variances. I implemented daily GRN reminders, a monthly price reconciliation checklist, and a 2% tolerance threshold for auto-clearing minor quantity variances. Within 6 weeks, the backlog cleared and recurring failures dropped by 60%.
+          </p>
+          <div class="exp-tools">
+            <span class="tool-tag">SAP MM</span><span class="tool-tag">SAP MRP</span><span class="tool-tag">Excel</span><span class="tool-tag">P2P</span><span class="tool-tag">RFQ</span><span class="tool-tag">SharePoint</span><span class="tool-tag">PowerPoint</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Timeline chart -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;margin-top:1rem" class="fade-up">
-      <h4 style="font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1.25rem">📈 Career Impact Timeline — Key Metrics Over Time</h4>
-      <div style="position:relative;height:220px"><canvas id="careerChart"></canvas></div>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="container">
-    <span class="sec-label">Portfolio Projects</span>
-    <h2 class="sec-title">Live Project Demos</h2>
-    <p class="sec-sub" style="margin-bottom:2rem">Interactive previews of real analytical work — click to explore each project.</p>
+  <div class="fade-in">
+    <p class="section-label">What I've Built</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
 
-    <div class="projects-tabs">
-      <button class="ptab active" onclick="switchProject('p1',this)">📊 Demand Forecasting Dashboard</button>
-      <button class="ptab" onclick="switchProject('p2',this)">🏭 Supplier Scorecard</button>
-    </div>
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <div class="project-title">Demand Forecasting & Inventory Optimization Dashboard</div>
+        <div class="project-org">Oklahoma Christian University · Retail Supply Chain</div>
+        <div class="project-desc">Built an interactive Power BI dashboard analyzing demand variability, stockout frequency, and safety stock levels across 500+ retail SKUs using SQL-extracted sales and inventory data. Applied ABC-XYZ classification and time-series forecasting to segment SKUs by revenue contribution and demand volatility.</div>
+        <div class="project-impact">Identified <span>$120K+</span> in potential carrying cost savings through reorder point adjustments and EOQ optimization.</div>
+        <div class="exp-tools" style="margin-bottom:1rem;">
+          <span class="tool-tag">Power BI</span><span class="tool-tag">SQL</span><span class="tool-tag">ABC-XYZ</span><span class="tool-tag">EOQ</span><span class="tool-tag">Time-Series</span>
+        </div>
+        <button class="demo-btn" onclick="openModal('modal1')">▶ Live Demo — ABC-XYZ Matrix</button>
+      </div>
 
-    <!-- PROJECT 1 -->
-    <div class="project-demo active" id="p1">
-      <div class="demo-info">
-        <div class="proj-tag">Retail Supply Chain · Oklahoma Christian University</div>
-        <h3>Demand Forecasting & Inventory Optimization</h3>
-        <p>Built an end-to-end Power BI dashboard analyzing demand variability, stockout frequency, and safety stock levels across 500+ retail SKUs. The core insight: not all SKUs deserve the same replenishment strategy. By combining ABC (revenue contribution) and XYZ (demand volatility) classification, I created a 9-cell matrix that tells planners exactly where to focus.</p>
-        <ul class="demo-outcomes">
-          <li>ABC-XYZ segmentation across 500+ retail SKUs using SQL-extracted data</li>
-          <li>Time-series forecasting to predict demand volatility per segment</li>
-          <li>EOQ optimization and reorder point recalibration</li>
-          <li><strong style="color:var(--green)">$120K+ in carrying cost savings identified</strong></li>
-        </ul>
-        <div class="demo-tech">
-          <span>Power BI</span><span>SQL</span><span>ABC-XYZ Analysis</span><span>EOQ Model</span><span>Time-Series</span>
+      <div class="project-card">
+        <div class="project-icon">🏭</div>
+        <div class="project-title">Supplier Performance & Strategic Sourcing Analysis</div>
+        <div class="project-org">Oklahoma Christian University · Healthcare Supply Chain</div>
+        <div class="project-desc">Designed a supplier scorecard framework in Power BI using SAP-extracted procurement data to evaluate 50+ vendors on OTIF, lead time compliance, defect rate, and cost competitiveness. Performed spend analysis and Kraljic matrix segmentation using SQL to classify suppliers into strategic, leverage, bottleneck, and non-critical categories.</div>
+        <div class="project-impact">Recommended dual-sourcing for <span>8 critical-risk suppliers</span>, reducing single-source dependency for high-priority medical device components.</div>
+        <div class="exp-tools" style="margin-bottom:1rem;">
+          <span class="tool-tag">Power BI</span><span class="tool-tag">SAP</span><span class="tool-tag">SQL</span><span class="tool-tag">Kraljic</span><span class="tool-tag">Scorecard</span>
         </div>
+        <button class="demo-btn" onclick="openModal('modal2')">▶ Live Demo — Supplier Scorecard</button>
       </div>
-      <div class="demo-visual">
-        <h4>ABC-XYZ SKU Classification Matrix (500+ SKUs)</h4>
-        <div class="abc-grid" style="flex:1">
-          <div class="abc-cell cell-ax" onclick="showABCDetail('AX')"><div class="cell-label">A-X</div><div class="cell-count">62</div><div class="cell-sub">High Value · Stable</div></div>
-          <div class="abc-cell cell-ay" onclick="showABCDetail('AY')"><div class="cell-label">A-Y</div><div class="cell-count">48</div><div class="cell-sub">High Value · Variable</div></div>
-          <div class="abc-cell cell-az" onclick="showABCDetail('AZ')"><div class="cell-label">A-Z</div><div class="cell-count">21</div><div class="cell-sub">High Value · Erratic</div></div>
-          <div class="abc-cell cell-bx" onclick="showABCDetail('BX')"><div class="cell-label">B-X</div><div class="cell-count">85</div><div class="cell-sub">Mid Value · Stable</div></div>
-          <div class="abc-cell cell-by" onclick="showABCDetail('BY')"><div class="cell-label">B-Y</div><div class="cell-count">73</div><div class="cell-sub">Mid Value · Variable</div></div>
-          <div class="abc-cell cell-bz" onclick="showABCDetail('BZ')"><div class="cell-label">B-Z</div><div class="cell-count">39</div><div class="cell-sub">Mid Value · Erratic</div></div>
-          <div class="abc-cell cell-cx" onclick="showABCDetail('CX')"><div class="cell-label">C-X</div><div class="cell-count">94</div><div class="cell-sub">Low Value · Stable</div></div>
-          <div class="abc-cell cell-cy" onclick="showABCDetail('CY')"><div class="cell-label">C-Y</div><div class="cell-count">52</div><div class="cell-sub">Low Value · Variable</div></div>
-          <div class="abc-cell cell-cz" onclick="showABCDetail('CZ')"><div class="cell-label">C-Z</div><div class="cell-count">26</div><div class="cell-sub">Low Value · Erratic</div></div>
-        </div>
-        <div class="abc-legend">
-          <span>🟢 A = Top 80% Revenue</span>
-          <span>🔵 B = Next 15%</span>
-          <span>⚫ C = Bottom 5%</span>
-          <span>X=Stable · Y=Variable · Z=Erratic</span>
-        </div>
-        <div id="abc-detail" style="margin-top:.75rem;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:10px;padding:.75rem;font-size:.82rem;color:#93c5fd;display:none"></div>
-      </div>
-    </div>
 
-    <!-- PROJECT 2 -->
-    <div class="project-demo" id="p2">
-      <div class="demo-info">
-        <div class="proj-tag">Healthcare Supply Chain · Oklahoma Christian University</div>
-        <h3>Supplier Performance & Strategic Sourcing Analysis</h3>
-        <p>Designed a supplier scorecard framework evaluating 50+ vendors across OTIF, lead time compliance, defect rate, and cost competitiveness. Used Kraljic Matrix segmentation to classify suppliers and identify strategic sourcing risks — particularly single-source dependencies in critical medical device components.</p>
-        <ul class="demo-outcomes">
-          <li>Evaluated 50+ vendors using SAP-extracted procurement data</li>
-          <li>Kraljic Matrix segmentation: Strategic, Leverage, Bottleneck, Non-Critical</li>
-          <li>Spend analysis using SQL to identify sourcing concentration risk</li>
-          <li><strong style="color:var(--green)">Dual-sourcing recommended for 8 critical-risk suppliers</strong></li>
-        </ul>
-        <div class="demo-tech">
-          <span>Power BI</span><span>SQL</span><span>SAP</span><span>Kraljic Matrix</span><span>Spend Analysis</span>
-        </div>
-      </div>
-      <div class="demo-visual">
-        <h4>Supplier Scorecard — Top 8 Vendors</h4>
-        <div style="overflow-x:auto;flex:1">
-          <table class="scorecard-table">
-            <thead>
-              <tr>
-                <th>Supplier</th>
-                <th>OTIF</th>
-                <th>Lead Time</th>
-                <th>Defect %</th>
-                <th>Score</th>
-                <th>Category</th>
-              </tr>
-            </thead>
-            <tbody id="scorecard-body"></tbody>
-          </table>
-        </div>
-        <div style="margin-top:1rem;height:130px;position:relative"><canvas id="kraljicChart"></canvas></div>
-      </div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="container">
-    <span class="sec-label">Technical Expertise</span>
-    <h2 class="sec-title">Skills & Tools</h2>
-    <p class="sec-sub" style="margin-bottom:2.5rem">A blend of supply chain domain knowledge and data analytics capability.</p>
-    <div class="skills-layout">
-      <div class="skill-block fade-up">
-        <h4>📊 Analytics & BI Tools</h4>
-        <div class="skill-row"><div class="sr-top"><span class="sr-name">Power BI</span><span class="sr-pct">92%</span></div><div class="skill-bar-bg"><div class="skill-bar" data-width="92"></div></div></div>
-        <div class="skill-row"><div class="sr-top"><span class="sr-name">SQL</span><span class="sr-pct">88%</span></div><div class="skill-bar-bg"><div class="skill-bar" data-width="88"></div></div></div>
-        <div class="skill-row"><div class="sr-top"><span class="sr-name">Tableau</span><span class="sr-pct">82%</span></div><div class="skill-bar-bg"><div class="skill-bar" data-width="82"></div></div></div>
-        <div class="skill-row"><div class="sr-top"><span class="sr-name">Advanced Excel</span><span class="sr-pct">95%</span></div><div class="skill-bar-bg"><div class="skill-bar" data-width="95"></div></div></div>
+  <div class="fade-in">
+    <p class="section-label">What I Know</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-title">⛓ Supply Chain & Planning</div>
+        <div class="skill-item"><div class="skill-name"><span>Demand Forecasting</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Inventory Management</span><span>92%</span></div><div class="skill-bar"><div class="skill-fill" data-width="92"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Procurement / P2P</span><span>95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>MRP / Replenishment</span><span>88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Strategic Sourcing</span><span>85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
       </div>
-      <div class="skill-block fade-up">
-        <h4>🏭 Supply Chain Domain</h4>
-        <div class="skill-row"><div class="sr-top"><span class="sr-name">Demand Forecasting</span><span class="sr-pct">88%</span></div><div class="skill-bar-bg"><div class="skill-bar" data-width="88"></div></div></div>
-        <div class="skill-row"><div class="sr-top"><span class="sr-name">Procurement / P2P</span><span class="sr-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar" data-width="90"></div></div></div>
-        <div class="skill-row"><div class="sr-top"><span class="sr-name">Inventory Management</span><span class="sr-pct">87%</span></div><div class="skill-bar-bg"><div class="skill-bar" data-width="87"></div></div></div>
-        <div class="skill-row"><div class="sr-top"><span class="sr-name">Strategic Sourcing</span><span class="sr-pct">83%</span></div><div class="skill-bar-bg"><div class="skill-bar" data-width="83"></div></div></div>
+      <div class="skill-category">
+        <div class="skill-cat-title">📊 Data & Analytics</div>
+        <div class="skill-item"><div class="skill-name"><span>Power BI / DAX</span><span>93%</span></div><div class="skill-bar"><div class="skill-fill" data-width="93"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>SQL</span><span>88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Advanced Excel</span><span>95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Tableau</span><span>82%</span></div><div class="skill-bar"><div class="skill-fill" data-width="82"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>KPI Dashboard Dev</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
       </div>
-      <div class="skill-block fade-up">
-        <h4>🖥️ Systems & ERP</h4>
-        <div class="tool-chips">
-          <span class="tool-chip">SAP MM</span><span class="tool-chip">SAP MRP</span><span class="tool-chip">ERP Systems</span>
-          <span class="tool-chip">TMS</span><span class="tool-chip">WMS</span><span class="tool-chip">SharePoint</span>
-          <span class="tool-chip">Master Data Mgmt</span><span class="tool-chip">Microsoft 365</span>
-        </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">⚙️ Systems & Tools</div>
+        <div class="skill-item"><div class="skill-name"><span>SAP MM / MRP</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>ERP Systems</span><span>85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>SharePoint</span><span>80%</span></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Power Query / ETL</span><span>85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>WMS / TMS</span><span>75%</span></div><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
       </div>
-      <div class="skill-block fade-up">
-        <h4>🤝 Operations & Process</h4>
-        <div class="tool-chips">
-          <span class="tool-chip">OTIF Tracking</span><span class="tool-chip">KPI Dashboards</span>
-          <span class="tool-chip">Exception Management</span><span class="tool-chip">Process Improvement</span>
-          <span class="tool-chip">Cross-Functional Collab</span><span class="tool-chip">Stakeholder Mgmt</span>
-          <span class="tool-chip">SLA Adherence</span><span class="tool-chip">Continuous Improvement</span>
-        </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">🤝 Operations & Process</div>
+        <div class="skill-item"><div class="skill-name"><span>Cross-Functional Collab</span><span>95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Process Improvement</span><span>88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Exception Management</span><span>92%</span></div><div class="skill-bar"><div class="skill-fill" data-width="92"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Stakeholder Mgmt</span><span>87%</span></div><div class="skill-bar"><div class="skill-fill" data-width="87"></div></div></div>
+        <div class="skill-item"><div class="skill-name"><span>Root Cause Analysis</span><span>85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- SUPPLY CHAIN FLOW -->
-<section id="scflow">
-  <div class="container">
-    <span class="sec-label">Domain Knowledge</span>
-    <h2 class="sec-title">End-to-End Supply Chain Expertise</h2>
-    <p class="sec-sub" style="margin-bottom:1rem">Click any node to see where I've added value in the supply chain.</p>
-    <div class="flow-container">
-      <div class="flow-node" onclick="showFlow('supplier')"><div class="fn-icon">🏭</div><div class="fn-label">Supplier</div><div class="fn-sub">Sourcing</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" onclick="showFlow('procurement')"><div class="fn-icon">📋</div><div class="fn-label">Procurement</div><div class="fn-sub">P2P / RFQ</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" onclick="showFlow('planning')"><div class="fn-icon">📈</div><div class="fn-label">Planning</div><div class="fn-sub">MRP / Forecast</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" onclick="showFlow('inventory')"><div class="fn-icon">📦</div><div class="fn-label">Inventory</div><div class="fn-sub">Allocation / DC</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" onclick="showFlow('analytics')"><div class="fn-icon">📊</div><div class="fn-label">Analytics</div><div class="fn-sub">KPI / BI</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" onclick="showFlow('delivery')"><div class="fn-icon">🚚</div><div class="fn-label">Delivery</div><div class="fn-sub">OTIF / SLA</div></div>
-    </div>
-    <div class="flow-detail" id="flow-detail"></div>
   </div>
 </section>
 
 <!-- EDUCATION -->
 <section id="education">
-  <div class="container">
-    <span class="sec-label">Academic Background</span>
-    <h2 class="sec-title">Education</h2>
-    <p class="sec-sub" style="margin-bottom:2rem">A unique combination of supply chain management and computer science engineering.</p>
-    <div class="edu-cards">
-      <div class="edu-card fade-up">
-        <div class="edu-icon">🎓</div>
-        <div class="degree">Master of Science — Science & Engineering</div>
-        <div class="school">Oklahoma Christian University</div>
-        <div class="meta">Graduated 2025</div>
-        <div class="gpa-badge">GPA: 3.5 / 4.0</div>
-        <div class="course-pills">
-          <span class="course-pill">Supply Chain Mgmt</span>
-          <span class="course-pill">Operations Mgmt</span>
-          <span class="course-pill">Global Procurement</span>
-          <span class="course-pill">Logistics & Transportation</span>
-          <span class="course-pill">Business Analytics</span>
-          <span class="course-pill">ERP Systems</span>
+  <div class="fade-in">
+    <p class="section-label">My Background</p>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">Master of Science — Science & Engineering</div>
+        <div class="edu-school">Oklahoma Christian University</div>
+        <div class="edu-meta">Graduated 2025 · GPA: 3.5 / 4.0</div>
+        <div class="edu-courses">
+          <span class="course-tag">Supply Chain Mgmt</span>
+          <span class="course-tag">Operations Mgmt</span>
+          <span class="course-tag">Global Procurement</span>
+          <span class="course-tag">Logistics & Transportation</span>
+          <span class="course-tag">Business Analytics</span>
+          <span class="course-tag">ERP Systems</span>
         </div>
       </div>
-      <div class="edu-card fade-up">
-        <div class="edu-icon">💻</div>
-        <div class="degree">Bachelor of Technology — Computer Science & Engineering</div>
-        <div class="school">University (India)</div>
-        <div class="meta">2019 – 2023</div>
-        <div class="gpa-badge">GPA: 8.9 / 10</div>
-        <p style="color:var(--muted);font-size:.85rem;line-height:1.7;margin-top:.5rem">A strong CS foundation enables a data-first approach to supply chain — from writing optimized SQL queries to building automated reporting pipelines and understanding ERP system architecture.</p>
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor of Technology — Computer Science & Engineering</div>
+        <div class="edu-school">India</div>
+        <div class="edu-meta">2019 – 2023 · GPA: 8.9 / 10</div>
+        <div class="edu-courses">
+          <span class="course-tag">Data Structures</span>
+          <span class="course-tag">Algorithms</span>
+          <span class="course-tag">Database Systems</span>
+          <span class="course-tag">Software Engineering</span>
+        </div>
+        <p style="color:var(--slate);font-size:.82rem;margin-top:1rem;">Strong CS foundation powers my SQL, data modeling, and analytics work in supply chain.</p>
       </div>
     </div>
   </div>
@@ -536,158 +423,263 @@ footer a{color:var(--accent);text-decoration:none}
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="container">
+  <div class="fade-in">
+    <p class="section-label">Let's Connect</p>
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="section-line"></div>
     <div class="contact-grid">
-      <div class="contact-left">
-        <span class="sec-label">Let's Connect</span>
-        <h2>Open to New Opportunities</h2>
-        <p>I'm actively looking for Supply Chain Analyst, Procurement Analyst, or Data Analytics roles where I can drive operational efficiency and build data-driven solutions.</p>
-        <div class="contact-links">
-          <a href="mailto:Ganeshsp209@gmail.com" class="clink"><div class="ci">✉️</div>Ganeshsp209@gmail.com</a>
-          <a href="tel:5126488441" class="clink"><div class="ci">📞</div>512-648-8441</a>
-          <a href="https://linkedin.com" target="_blank" class="clink"><div class="ci">🔗</div>LinkedIn Profile</a>
-          <a href="#" class="clink"><div class="ci">📍</div>Texas, USA · Open to Remote</a>
-        </div>
+      <div class="contact-info">
+        <p>I'm open to supply chain analyst, procurement analyst, and data analytics roles. Whether you have a question, an opportunity, or just want to talk supply chain — my inbox is open.</p>
+        <div class="contact-item"><div class="contact-icon">✉️</div><div><div style="color:var(--teal);font-size:.8rem;">Email</div><div>Ganeshsp209@gmail.com</div></div></div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div><div style="color:var(--teal);font-size:.8rem;">Phone</div><div>512-648-8441</div></div></div>
+        <div class="contact-item"><div class="contact-icon">📍</div><div><div style="color:var(--teal);font-size:.8rem;">Location</div><div>Texas, USA</div></div></div>
+        <div class="contact-item"><div class="contact-icon">💼</div><div><div style="color:var(--teal);font-size:.8rem;">LinkedIn</div><a href="https://linkedin.com" target="_blank" style="color:var(--light);">linkedin.com/in/ganesh (update link)</a></div></div>
       </div>
-      <div class="contact-right">
-        <h4>Send a Message</h4>
-        <div class="form-group"><label>Your Name</label><input type="text" placeholder="Jane Smith"/></div>
-        <div class="form-group"><label>Email</label><input type="email" placeholder="jane@company.com"/></div>
-        <div class="form-group"><label>Message</label><textarea placeholder="I'd love to discuss a supply chain analyst opportunity..."></textarea></div>
-        <button class="form-submit" onclick="handleSubmit()">Send Message →</button>
+      <div class="contact-form">
+        <div id="form-success" style="display:none;text-align:center;padding:2rem;">
+          <div style="font-size:3rem;margin-bottom:1rem;">✅</div>
+          <div style="color:var(--teal);font-size:1.1rem;font-weight:700;">Message Sent!</div>
+          <div style="color:var(--slate);margin-top:.5rem;">I'll get back to you soon.</div>
+        </div>
+        <form id="contact-form" onsubmit="submitForm(event)">
+          <div class="form-group"><label>Your Name</label><input type="text" placeholder="John Smith" required/></div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@company.com" required/></div>
+          <div class="form-group"><label>Subject</label><input type="text" placeholder="Job Opportunity / Collaboration" required/></div>
+          <div class="form-group"><label>Message</label><textarea placeholder="Tell me about the role or project..." required></textarea></div>
+          <button type="submit" class="submit-btn">Send Message →</button>
+        </form>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2025 Ganesh · Supply Chain Analyst · <a href="mailto:Ganeshsp209@gmail.com">Ganeshsp209@gmail.com</a> · Built for GitHub Pages</p>
+  <p>Designed & built by Ganesh · Supply Chain Analyst · Texas</p>
+  <p style="margin-top:.5rem;font-size:.75rem;">Power BI · SQL · SAP · Tableau · Excel</p>
 </footer>
 
+<!-- MODAL 1: ABC-XYZ -->
+<div class="modal-overlay" id="modal1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal1')">✕</button>
+    <div class="modal-title">📊 Demand Forecasting Dashboard</div>
+    <div class="modal-sub">ABC-XYZ Classification Matrix — Click any cell to see the replenishment strategy</div>
+    <div class="matrix-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>ABC \ XYZ</th>
+            <th>X — Stable Demand</th>
+            <th>Y — Variable Demand</th>
+            <th>Z — Unpredictable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>A — High Value</th>
+            <td class="matrix-cell cell-AX" onclick="showStrategy('AX')"><strong>AX</strong><br/><small>High Value, Stable</small></td>
+            <td class="matrix-cell cell-AY" onclick="showStrategy('AY')"><strong>AY</strong><br/><small>High Value, Variable</small></td>
+            <td class="matrix-cell cell-AZ" onclick="showStrategy('AZ')"><strong>AZ</strong><br/><small>High Value, Erratic</small></td>
+          </tr>
+          <tr>
+            <th>B — Medium Value</th>
+            <td class="matrix-cell cell-BX" onclick="showStrategy('BX')"><strong>BX</strong><br/><small>Med Value, Stable</small></td>
+            <td class="matrix-cell cell-BY" onclick="showStrategy('BY')"><strong>BY</strong><br/><small>Med Value, Variable</small></td>
+            <td class="matrix-cell cell-BZ" onclick="showStrategy('BZ')"><strong>BZ</strong><br/><small>Med Value, Erratic</small></td>
+          </tr>
+          <tr>
+            <th>C — Low Value</th>
+            <td class="matrix-cell cell-CX" onclick="showStrategy('CX')"><strong>CX</strong><br/><small>Low Value, Stable</small></td>
+            <td class="matrix-cell cell-CY" onclick="showStrategy('CY')"><strong>CY</strong><br/><small>Low Value, Variable</small></td>
+            <td class="matrix-cell cell-CZ" onclick="showStrategy('CZ')"><strong>CZ</strong><br/><small>Low Value, Erratic</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="matrix-info" id="matrix-info">👆 Click any cell above to see the recommended replenishment strategy for that SKU segment.</div>
+    <div class="chart-container" style="height:220px;margin-top:1.5rem;">
+      <canvas id="forecastChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 2: Supplier Scorecard -->
+<div class="modal-overlay" id="modal2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal2')">✕</button>
+    <div class="modal-title">🏭 Supplier Performance Scorecard</div>
+    <div class="modal-sub">Healthcare Supply Chain — 50+ Vendors Evaluated · Kraljic Matrix Segmentation</div>
+    <table class="scorecard-table">
+      <thead>
+        <tr>
+          <th>Supplier</th>
+          <th>OTIF %</th>
+          <th>Lead Time Compliance</th>
+          <th>Defect Rate</th>
+          <th>Cost Score</th>
+          <th>Overall</th>
+          <th>Category</th>
+          <th>Risk</th>
+        </tr>
+      </thead>
+      <tbody id="scorecard-body"></tbody>
+    </table>
+    <div class="chart-container" style="height:240px;">
+      <canvas id="kraljicChart"></canvas>
+    </div>
+    <div style="background:rgba(100,255,218,.05);border:1px solid rgba(100,255,218,.15);border-radius:8px;padding:1rem;margin-top:1rem;">
+      <strong style="color:var(--teal);">Key Insight:</strong> <span style="color:var(--light);font-size:.9rem;">8 suppliers in the Strategic quadrant with single-source dependency were flagged for dual-sourcing. Implementing backup suppliers for these critical medical device components reduces supply continuity risk by an estimated 40%.</span>
+    </div>
+  </div>
+</div>
+
 <script>
-// ── COUNTER ANIMATION ──
+// ---- COUNTER ANIMATION ----
 function animateCounters(){
   document.querySelectorAll('[data-target]').forEach(el=>{
     const target=parseFloat(el.dataset.target);
     const prefix=el.dataset.prefix||'';
-    const suffix=el.dataset.suffix||'+';
-    const isDecimal=target%1!==0;
-    let start=0,duration=1800,step=16;
-    const inc=target/(duration/step);
+    const suffix=el.dataset.suffix||'';
+    let current=0;
+    const step=target/60;
     const timer=setInterval(()=>{
-      start=Math.min(start+inc,target);
-      el.textContent=prefix+(isDecimal?start.toFixed(1):Math.floor(start))+suffix;
-      if(start>=target)clearInterval(timer);
-    },step);
+      current+=step;
+      if(current>=target){current=target;clearInterval(timer);}
+      el.textContent=prefix+(Number.isInteger(target)?Math.floor(current):current.toFixed(1))+suffix;
+    },25);
   });
 }
-setTimeout(animateCounters,400);
+window.addEventListener('load',()=>setTimeout(animateCounters,400));
 
-// ── FADE UP ON SCROLL ──
+// ---- TOGGLE EXPERIENCE ----
+function toggleExp(header){
+  const body=header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ---- SCROLL FADE ----
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
-},{threshold:.15});
-document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
-
-// ── SKILL BARS ──
-const skillObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
-      e.target.querySelectorAll('.skill-bar').forEach(bar=>{
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.skill-fill').forEach(bar=>{
         bar.style.width=bar.dataset.width+'%';
       });
     }
   });
-},{threshold:.3});
-document.querySelectorAll('.skill-block').forEach(el=>skillObs.observe(el));
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 
-// ── CAREER CHART ──
-const ctx=document.getElementById('careerChart').getContext('2d');
-new Chart(ctx,{
-  type:'line',
-  data:{
-    labels:['Q1 2022','Q3 2022','Q1 2023','Q3 2023','Q1 2024','Q3 2024','Q1 2025','Q3 2025'],
-    datasets:[
-      {label:'Procurement Efficiency %',data:[60,65,72,78,85,85,88,90],borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.08)',tension:.4,fill:true,pointBackgroundColor:'#3b82f6',pointRadius:4},
-      {label:'Automation Rate %',data:[20,30,45,55,65,70,72,75],borderColor:'#06b6d4',backgroundColor:'rgba(6,182,212,.06)',tension:.4,fill:true,pointBackgroundColor:'#06b6d4',pointRadius:4},
-      {label:'Report Accuracy %',data:[70,72,75,80,85,88,90,95],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.06)',tension:.4,fill:true,pointBackgroundColor:'#10b981',pointRadius:4}
-    ]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{labels:{color:'#64748b',font:{size:11},boxWidth:12}}},
-    scales:{
-      x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{size:10}}},
-      y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{size:10}},min:0,max:100}
-    }
-  }
-});
-
-// ── PROJECT TABS ──
-function switchProject(id,btn){
-  document.querySelectorAll('.project-demo').forEach(d=>d.classList.remove('active'));
-  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+// ---- MODAL ----
+function openModal(id){
   document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-  if(id==='p2')renderScorecard();
+  if(id==='modal1') initForecastChart();
+  if(id==='modal2'){initScorecard();initKraljicChart();}
 }
+function closeModal(id){document.getElementById(id).classList.remove('active');}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active');}));
 
-// ── ABC DETAIL ──
-const abcDetails={
-  'AX':'🟢 AX — High revenue, stable demand. Use continuous replenishment with tight safety stock. Priority for automation.',
-  'AY':'🟡 AY — High revenue, variable demand. Use statistical forecasting + buffer stock. Monitor weekly.',
-  'AZ':'🔴 AZ — High revenue, erratic demand. Requires manual review, safety stock buffers, and supplier collaboration.',
-  'BX':'🔵 BX — Mid revenue, stable. Periodic review system works well. Automate reorder points.',
-  'BY':'🟣 BY — Mid revenue, variable. Combine periodic review with demand sensing.',
-  'BZ':'🩷 BZ — Mid revenue, erratic. Consider consignment or VMI arrangements.',
-  'CX':'🩵 CX — Low revenue, stable. Bulk ordering, min-max replenishment.',
-  'CY':'⚫ CY — Low revenue, variable. Reduce SKU complexity where possible.',
-  'CZ':'⬛ CZ — Low revenue, erratic. Candidate for SKU rationalization or make-to-order.'
+// ---- ABC-XYZ STRATEGIES ----
+const strategies={
+  AX:{title:'AX — High Value, Stable Demand',text:'🟢 <strong>Strategy: Continuous Review (ROP) with tight safety stock.</strong> These are your most predictable, high-value SKUs. Use automated reorder points in SAP with minimal safety stock buffer. Negotiate long-term contracts with primary suppliers. At Kraft Heinz, tomato paste and core packaging fell here — automated PR-to-PO conversion handled 90%+ of replenishment.'},
+  AY:{title:'AY — High Value, Variable Demand',text:'🟡 <strong>Strategy: Periodic review with moderate safety stock + demand sensing.</strong> High value but demand fluctuates (e.g. seasonal ingredients). Increase safety stock during peak periods. Use demand planning collaboration to get 6–8 week advance signals. Align with S&OP cycle.'},
+  AZ:{title:'AZ — High Value, Unpredictable Demand',text:'🔴 <strong>Strategy: Dual sourcing + elevated safety stock + expedite protocols.</strong> These are your highest-risk SKUs. Maintain backup suppliers, hold higher safety stock, and set up expedite triggers. At Kraft Heinz, specialty promotional ingredients fell here — emergency RFQ processes were pre-built for these.'},
+  BX:{title:'BX — Medium Value, Stable Demand',text:'🟢 <strong>Strategy: Automated replenishment with standard safety stock.</strong> Reliable and medium-impact. Let MRP handle these with standard parameters. Review quarterly to ensure lead times and MOQs are current in SAP.'},
+  BY:{title:'BY — Medium Value, Variable Demand',text:'🟡 <strong>Strategy: Periodic review with buffer stock adjustments.</strong> Monitor demand trends monthly. Adjust safety stock seasonally. Good candidates for vendor-managed inventory (VMI) arrangements.'},
+  BZ:{title:'BZ — Medium Value, Erratic Demand',text:'🟠 <strong>Strategy: Reactive replenishment + supplier flexibility agreements.</strong> Difficult to forecast. Negotiate flexible MOQs and short lead times with suppliers. Keep minimal stock and replenish reactively with fast-response suppliers.'},
+  CX:{title:'CX — Low Value, Stable Demand',text:'🟢 <strong>Strategy: Bulk ordering / blanket POs to minimize transaction cost.</strong> Low value, predictable — the cost of managing these should be near zero. Use blanket purchase orders covering 3–6 months. Automate fully in SAP.'},
+  CY:{title:'CY — Low Value, Variable Demand',text:'🟡 <strong>Strategy: Min-max replenishment with infrequent review.</strong> Low priority. Set min-max levels and let the system trigger replenishment. Review annually unless a stockout occurs.'},
+  CZ:{title:'CZ — Low Value, Erratic Demand',text:'⚪ <strong>Strategy: Order-on-demand / consignment stock.</strong> Lowest priority. Consider consignment arrangements where the supplier holds stock on-site. Only order when actually needed. Evaluate whether these SKUs should be stocked at all.'}
 };
-function showABCDetail(cell){
-  const d=document.getElementById('abc-detail');
-  d.textContent=abcDetails[cell];
-  d.style.display='block';
+function showStrategy(cell){
+  const s=strategies[cell];
+  document.getElementById('matrix-info').innerHTML=`<strong style="color:var(--teal)">${s.title}</strong><br/><br/>${s.text}`;
 }
 
-// ── SCORECARD ──
+// ---- FORECAST CHART ----
+let forecastChartInst=null;
+function initForecastChart(){
+  if(forecastChartInst)return;
+  const ctx=document.getElementById('forecastChart').getContext('2d');
+  forecastChartInst=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      datasets:[
+        {label:'Actual Demand',data:[420,390,450,480,520,610,580,540,490,530,620,700],borderColor:'#64ffda',backgroundColor:'rgba(100,255,218,.1)',tension:.4,fill:true},
+        {label:'Forecast',data:[410,400,440,470,510,600,570,550,500,520,610,690],borderColor:'rgba(100,200,218,.6)',borderDash:[5,5],tension:.4,fill:false},
+        {label:'Safety Stock Level',data:[80,80,80,80,80,80,80,80,80,80,80,80],borderColor:'rgba(255,150,100,.5)',borderDash:[3,3],tension:0,fill:false}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8892b0',font:{size:11}}}},scales:{x:{ticks:{color:'#8892b0'},grid:{color:'rgba(255,255,255,.05)'}},y:{ticks:{color:'#8892b0'},grid:{color:'rgba(255,255,255,.05)'}}}}
+  });
+}
+
+// ---- SCORECARD DATA ----
 const suppliers=[
-  {name:'MedTech Alpha',otif:94,lt:91,defect:1.2,score:93,cat:'strategic'},
-  {name:'BioSupply Co.',otif:88,lt:85,defect:2.1,score:86,cat:'leverage'},
-  {name:'PharmaLink',otif:72,lt:68,defect:3.8,score:71,cat:'bottleneck'},
-  {name:'DeviceParts Inc.',otif:96,lt:94,defect:0.8,score:95,cat:'strategic'},
-  {name:'MedCore Ltd.',otif:81,lt:79,defect:2.9,score:80,cat:'leverage'},
-  {name:'SurgicalPro',otif:65,lt:60,defect:5.1,score:63,cat:'bottleneck'},
-  {name:'HealthMat',otif:90,lt:88,defect:1.5,score:89,cat:'strategic'},
-  {name:'GenMed Supply',otif:78,lt:75,defect:3.2,score:76,cat:'noncrit'}
+  {name:'MedTech Supplies Co.',otif:96,ltc:94,defect:1.2,cost:88,cat:'Strategic',risk:'Low'},
+  {name:'BioMed Components',otif:91,ltc:89,defect:2.1,cost:92,cat:'Strategic',risk:'Medium'},
+  {name:'SurgicalParts Inc.',otif:78,ltc:72,defect:4.5,cost:95,cat:'Bottleneck',risk:'High'},
+  {name:'DevicePro Ltd.',otif:88,ltc:85,defect:1.8,cost:80,cat:'Leverage',risk:'Low'},
+  {name:'MedSupply Global',otif:94,ltc:91,defect:1.0,cost:76,cat:'Strategic',risk:'Low'},
+  {name:'HealthParts Corp.',otif:65,ltc:60,defect:6.2,cost:98,cat:'Bottleneck',risk:'High'},
+  {name:'ClinicalGoods LLC',otif:82,ltc:80,defect:2.8,cost:85,cat:'Leverage',risk:'Medium'},
+  {name:'MedEquip Direct',otif:97,ltc:96,defect:0.8,cost:72,cat:'Non-Critical',risk:'Low'},
 ];
-function renderScorecard(){
+function getScoreColor(v,invert=false){
+  if(invert){return v<2?'badge-green':v<4?'badge-yellow':'badge-red';}
+  return v>=90?'badge-green':v>=80?'badge-yellow':'badge-red';
+}
+function initScorecard(){
   const tbody=document.getElementById('scorecard-body');
-  if(tbody.innerHTML!=='')return;
+  if(tbody.innerHTML)return;
   suppliers.forEach(s=>{
-    const color=s.score>=90?'#10b981':s.score>=75?'#3b82f6':s.score>=65?'#f59e0b':'#ef4444';
-    const badgeClass='badge-'+s.cat;
+    const overall=Math.round((s.otif+s.ltc+(100-s.defect*10)+s.cost)/4);
+    const riskClass=s.risk==='Low'?'badge-green':s.risk==='Medium'?'badge-yellow':'badge-red';
     tbody.innerHTML+=`<tr>
-      <td style="font-weight:600;font-size:.82rem">${s.name}</td>
-      <td>${s.otif}%</td>
-      <td>${s.lt}%</td>
-      <td style="color:${s.defect>3?'#ef4444':'#10b981'}">${s.defect}%</td>
-      <td><div style="display:flex;align-items:center;gap:.5rem"><div class="score-bar-wrap"><div class="score-bar" style="width:${s.score}%;background:${color}"></div></div><span style="font-size:.78rem;color:${color};font-weight:600">${s.score}</span></div></td>
-      <td><span class="${badgeClass}">${s.cat.charAt(0).toUpperCase()+s.cat.slice(1)}</span></td>
+      <td style="color:var(--white);font-weight:600">${s.name}</td>
+      <td><div class="score-bar"><div class="score-fill" style="width:${s.otif}%;background:${s.otif>=90?'#64ff96':s.otif>=80?'#ffdc64':'#ff6464'}"></div></div><small>${s.otif}%</small></td>
+      <td><div class="score-bar"><div class="score-fill" style="width:${s.ltc}%;background:${s.ltc>=90?'#64ff96':s.ltc>=80?'#ffdc64':'#ff6464'}"></div></div><small>${s.ltc}%</small></td>
+      <td><span class="badge ${getScoreColor(s.defect,true)}">${s.defect}%</span></td>
+      <td><div class="score-bar"><div class="score-fill" style="width:${s.cost}%;background:#64ffda"></div></div><small>${s.cost}/100</small></td>
+      <td><strong style="color:${overall>=85?'#64ff96':overall>=75?'#ffdc64':'#ff6464'}">${overall}</strong></td>
+      <td style="color:var(--teal);font-size:.8rem">${s.cat}</td>
+      <td><span class="badge ${riskClass}">${s.risk}</span></td>
     </tr>`;
   });
-  // Kraljic mini chart
-  setTimeout(()=>{
-    const kc=document.getElementById('kraljicChart').getContext('2d');
-    new Chart(kc,{
-      type:'bar',
-      data:{
-        labels:['Strategic','Leverage','Bottleneck','Non-Critical'],
-        datasets:[{label:'Supplier Count',data:[3,2,2,1],backgroundColor:['rgba(16,185,129,.6)','rgba(59,130,246,.6)','rgba(245,158,11,.6)','rgba(100,116,139,.4)'],borderRadius:6}]
-      },
-      options:{
-        responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{grid:{display:false},ticks:{color:'#64748b',font:{size:10}}},
-          y:{grid:{color:'rgba(255,255,25
+}
+
+// ---- KRALJIC CHART ----
+let kraljicInst=null;
+function initKraljicChart(){
+  if(kraljicInst)return;
+  const ctx=document.getElementById('kraljicChart').getContext('2d');
+  kraljicInst=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:['Strategic','Leverage','Bottleneck','Non-Critical'],
+      datasets:[{
+        label:'Number of Suppliers',
+        data:[3,2,2,1],
+        backgroundColor:['rgba(100,255,218,.7)','rgba(100,200,150,.6)','rgba(255,150,100,.6)','rgba(100,150,200,.5)'],
+        borderColor:['#64ffda','#64c896','#ff9664','#6496c8'],
+        borderWidth:2,borderRadius:6
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},title:{display:true,text:'Kraljic Matrix — Supplier Segmentation',color:'#ccd6f6',font:{size:13}}},
+      scales:{x:{ticks:{color:'#8892b0'},grid:{color:'rgba(255,255,255,.05)'}},y:{ticks:{color:'#8892b0',stepSize:1},grid:{color:'rgba(255,255,255,.05)'},title:{display:true,text:'Supplier Count',color:'#8892b0'}}}
+    }
+  });
+}
+
+// ---- CONTACT FORM ----
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('contact-form').style.display='none';
+  document.getElementById('form-success').style.display='block';
+}
+</script>
+</body>
+</html>
